@@ -1,0 +1,283 @@
+/* =========================================
+   VARIABLES (TEMA CLARO Y OSCURO)
+========================================= */
+:root {
+  /* Tema Claro (por defecto) */
+  --bg-color-1: #e0c3fc;
+  --bg-color-2: #cbb4d4;
+  --bg-color-3: #8ec5fc;
+  --container-bg: rgba(255, 255, 255, 0.85);
+  --text-main: #3d1b63;
+  --text-sec: #6a4b93;
+  --border-neon: #a64bf4;
+  --neon-glow: rgba(166, 75, 244, 0.4);
+  --input-bg: #f4ebff;
+  --input-text: #3d1b63;
+  --btn-bg: linear-gradient(90deg, #a64bf4, #7d2ae8);
+  --btn-hover-shadow: rgba(166, 75, 244, 0.6);
+  --success: #00b386;
+  --error: #e6004c;
+}
+
+body.dark {
+  /* Tema Oscuro (Púrpura Profundo y Neón) */
+  --bg-color-1: #090211;
+  --bg-color-2: #2b0f4c;
+  --bg-color-3: #16052b;
+  --container-bg: rgba(15, 5, 24, 0.85);
+  --text-main: #f0d9ff;
+  --text-sec: #c9a0f5;
+  --border-neon: #d900ff;
+  --neon-glow: rgba(217, 0, 255, 0.7);
+  --input-bg: rgba(30, 10, 50, 0.6);
+  --input-text: #ffffff;
+  --btn-bg: linear-gradient(90deg, #6b1bc2, #d900ff);
+  --btn-hover-shadow: #d900ff;
+  --success: #00ffcc;
+  --error: #ff0055;
+}
+
+/* =========================================
+   ESTILOS GLOBALES Y FONDO ANIMADO
+========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Gradiente de alto contraste: Púrpura oscuro predominante con un destello claro en el medio */
+  background: linear-gradient(
+    -45deg, 
+    #0a001a, /* Púrpura casi negro */
+    #2b0f4c, /* Púrpura oscuro */
+    #7d2ae8, /* Neón violeta intermedio */
+    #e0c3fc, /* Toque súper claro / Lila */
+    #16052b  /* Vuelta al púrpura profundo */
+  );
+  
+  /* Hacemos el fondo mucho más grande para que el movimiento se note al desplazarse */
+  background-size: 400% 400%;
+  
+  /* Animación más dinámica (8 segundos) */
+  animation: movimientoFondo 8s ease-in-out infinite;
+  
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* Animación del fondo fluyendo de lado a lado */
+@keyframes movimientoFondo {
+  0% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+  100% { 
+    background-position: 0% 50%; 
+  }
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL (GLASSMORPHISM)
+========================================= */
+.contenedor {
+  background: var(--container-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 50px 40px 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  position: relative;
+  text-align: center;
+  /* Bordes Neón */
+  border: 2px solid var(--border-neon);
+  box-shadow: 0 0 15px var(--neon-glow), inset 0 0 10px var(--neon-glow);
+}
+
+/* =========================================
+   CONTROLES SUPERIORES (TEMA E IDIOMA)
+========================================= */
+.tema-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  filter: drop-shadow(0 0 5px var(--neon-glow));
+}
+
+.tema-btn:hover {
+  transform: scale(1.1);
+}
+
+#idioma {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--input-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-neon);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+}
+
+#idioma:focus {
+  box-shadow: 0 0 8px var(--neon-glow);
+}
+
+/* =========================================
+   TIPOGRAFÍA Y LOGO
+========================================= */
+.logo {
+  font-size: 3.5rem;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  filter: drop-shadow(0 0 10px var(--neon-glow));
+}
+
+.version {
+  font-size: 0.75rem;
+  color: var(--text-sec);
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  text-shadow: 0 0 8px var(--neon-glow);
+}
+
+#subtitulo {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-sec);
+  margin-bottom: 30px;
+}
+
+/* =========================================
+   FORMULARIO E INPUTS
+========================================= */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px 15px;
+  margin-bottom: 15px;
+  background: var(--input-bg);
+  border: 1px solid rgba(166, 75, 244, 0.5);
+  border-radius: 10px;
+  color: var(--input-text);
+  font-size: 1rem;
+  outline: none;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+  color: var(--text-sec);
+  opacity: 0.7;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--border-neon);
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+/* Checkbox de Mostrar Contraseña */
+.mostrar-pass {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 25px;
+  font-size: 0.9rem;
+  color: var(--text-sec);
+  cursor: pointer;
+}
+
+.mostrar-pass input[type="checkbox"] {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--border-neon);
+  cursor: pointer;
+}
+
+.mostrar-pass label {
+  cursor: pointer;
+}
+
+/* =========================================
+   BOTÓN DE INGRESO
+========================================= */
+button#btnLogin {
+  width: 100%;
+  padding: 14px;
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button#btnLogin:hover {
+  box-shadow: 0 0 20px var(--btn-hover-shadow);
+  transform: translateY(-2px);
+}
+
+button#btnLogin:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   MENSAJES Y FOOTER
+========================================= */
+#mensaje {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  min-height: 24px; /* Evita que el layout salte */
+}
+
+.exito {
+  color: var(--success);
+  text-shadow: 0 0 8px var(--success);
+}
+
+.error {
+  color: var(--error);
+  text-shadow: 0 0 8px var(--error);
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: var(--text-sec);
+  opacity: 0.8;
+}
