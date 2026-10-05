@@ -2,7 +2,6 @@
    VARIABLES (TEMA CLARO Y OSCURO)
 ========================================= */
 :root {
-  /* Tema Claro (por defecto) */
   --bg-color-1: #e0c3fc;
   --bg-color-2: #cbb4d4;
   --bg-color-3: #8ec5fc;
@@ -20,7 +19,6 @@
 }
 
 body.dark {
-  /* Tema Oscuro (Púrpura Profundo y Neón) */
   --bg-color-1: #090211;
   --bg-color-2: #2b0f4c;
   --bg-color-3: #16052b;
@@ -53,65 +51,52 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  /* Gradiente de alto contraste: Púrpura oscuro predominante con un destello claro en el medio */
-  background: linear-gradient(
-    -45deg, 
-    #0a001a, /* Púrpura casi negro */
-    #2b0f4c, /* Púrpura oscuro */
-    #7d2ae8, /* Neón violeta intermedio */
-    #e0c3fc, /* Toque súper claro / Lila */
-    #16052b  /* Vuelta al púrpura profundo */
-  );
-  
-  /* Hacemos el fondo mucho más grande para que el movimiento se note al desplazarse */
+  background: linear-gradient(-45deg, #0a001a, #2b0f4c, #7d2ae8, #e0c3fc, #16052b);
   background-size: 400% 400%;
-  
-  /* Animación más dinámica (8 segundos) */
   animation: movimientoFondo 8s ease-in-out infinite;
-  
   color: var(--text-main);
-  margin: 0;
+  padding: 20px 0;
 }
 
-/* Animación del fondo fluyendo de lado a lado */
 @keyframes movimientoFondo {
-  0% { 
-    background-position: 0% 50%; 
-  }
-  50% { 
-    background-position: 100% 50%; 
-  }
-  100% { 
-    background-position: 0% 50%; 
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* =========================================
-   CONTENEDOR PRINCIPAL (GLASSMORPHISM)
+   CONTENEDOR PRINCIPAL
 ========================================= */
 .contenedor {
   background: var(--container-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 50px 40px 30px;
+  padding: 30px;
   border-radius: 20px;
   width: 90%;
   max-width: 420px;
-  position: relative;
   text-align: center;
-  /* Bordes Neón */
   border: 2px solid var(--border-neon);
   box-shadow: 0 0 15px var(--neon-glow), inset 0 0 10px var(--neon-glow);
+  transition: max-width 0.5s ease;
+}
+
+.contenedor.modo-dashboard {
+  max-width: 800px;
 }
 
 /* =========================================
-   CONTROLES SUPERIORES (TEMA E IDIOMA)
+   NUEVA BARRA DE CONTROLES SUPERIORES (CORREGIDA)
 ========================================= */
+.controles-superiores {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .tema-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
   background: transparent;
   border: none;
   font-size: 1.5rem;
@@ -119,27 +104,20 @@ body {
   filter: drop-shadow(0 0 5px var(--neon-glow));
 }
 
-.tema-btn:hover {
-  transform: scale(1.1);
-}
+.tema-btn:hover { transform: scale(1.1); }
 
 #idioma {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   background: var(--input-bg);
   color: var(--text-main);
   border: 1px solid var(--border-neon);
   border-radius: 8px;
-  padding: 5px 10px;
+  padding: 6px 10px;
   font-size: 0.85rem;
   cursor: pointer;
   outline: none;
 }
 
-#idioma:focus {
-  box-shadow: 0 0 8px var(--neon-glow);
-}
+#idioma:focus { box-shadow: 0 0 8px var(--neon-glow); }
 
 /* =========================================
    TIPOGRAFÍA Y LOGO
@@ -147,7 +125,6 @@ body {
 .logo {
   font-size: 3.5rem;
   margin-bottom: 5px;
-  margin-top: 10px;
   filter: drop-shadow(0 0 10px var(--neon-glow));
 }
 
@@ -155,7 +132,7 @@ body {
   font-size: 0.75rem;
   color: var(--text-sec);
   letter-spacing: 2px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -170,21 +147,21 @@ h1 {
   font-size: 1rem;
   font-weight: 500;
   color: var(--text-sec);
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 /* =========================================
-   FORMULARIO E INPUTS
+   FORMULARIOS E INPUTS
 ========================================= */
-form {
-  display: flex;
-  flex-direction: column;
-}
+form { display: flex; flex-direction: column; }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select {
   width: 100%;
-  padding: 14px 15px;
+  padding: 12px 15px;
   margin-bottom: 15px;
   background: var(--input-bg);
   border: 1px solid rgba(166, 75, 244, 0.5);
@@ -194,24 +171,16 @@ input[type="password"] {
   outline: none;
 }
 
-input[type="text"]::placeholder,
-input[type="password"]::placeholder {
-  color: var(--text-sec);
-  opacity: 0.7;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
+input:focus, select:focus {
   border-color: var(--border-neon);
   box-shadow: 0 0 12px var(--neon-glow);
 }
 
-/* Checkbox de Mostrar Contraseña */
 .mostrar-pass {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-size: 0.9rem;
   color: var(--text-sec);
   cursor: pointer;
@@ -222,17 +191,12 @@ input[type="password"]:focus {
   width: 16px;
   height: 16px;
   accent-color: var(--border-neon);
-  cursor: pointer;
-}
-
-.mostrar-pass label {
-  cursor: pointer;
 }
 
 /* =========================================
-   BOTÓN DE INGRESO
+   BOTONES
 ========================================= */
-button#btnLogin {
+button#btnLogin, button#btnGuardarGasto {
   width: 100%;
   padding: 14px;
   background: var(--btn-bg);
@@ -246,38 +210,128 @@ button#btnLogin {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-button#btnLogin:hover {
+button#btnLogin:hover, button#btnGuardarGasto:hover {
   box-shadow: 0 0 20px var(--btn-hover-shadow);
   transform: translateY(-2px);
 }
 
-button#btnLogin:active {
-  transform: translateY(0);
-}
-
 /* =========================================
-   MENSAJES Y FOOTER
+   ESTILOS DASHBOARD Y TABLA
 ========================================= */
-#mensaje {
-  margin-top: 20px;
+.header-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--input-bg);
+  border: 1px solid rgba(166, 75, 244, 0.3);
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
   font-size: 0.95rem;
-  font-weight: bold;
-  min-height: 24px; /* Evita que el layout salte */
 }
 
-.exito {
+.btn-logout {
+  background: var(--error);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card-resumen {
+  background: var(--input-bg);
+  border: 1px solid var(--border-neon);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px var(--neon-glow);
+}
+
+.monto-total {
+  font-size: 2.2rem;
+  font-weight: bold;
   color: var(--success);
   text-shadow: 0 0 8px var(--success);
+  margin-top: 5px;
 }
 
-.error {
-  color: var(--error);
-  text-shadow: 0 0 8px var(--error);
+.form-dashboard .grid-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
 }
 
-footer {
-  margin-top: 30px;
-  font-size: 0.8rem;
-  color: var(--text-sec);
-  opacity: 0.8;
+.form-botones { display: flex; gap: 10px; margin-bottom: 20px; }
+
+.btn-cancelar {
+  background: #64748b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-weight: bold;
+  cursor: pointer;
 }
+
+.tabla-container { overflow-x: auto; margin-bottom: 15px; }
+
+.tabla-gastos {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabla-gastos th, .tabla-gastos td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(166, 75, 244, 0.3);
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.tabla-gastos th { background: var(--input-bg); color: var(--text-sec); }
+
+.btn-editar, .btn-eliminar {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-editar { background: #3b82f6; color: white; margin-right: 5px; }
+.btn-eliminar { background: var(--error); color: white; }
+
+/* MODAL GLASSMORPHISM */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal-content {
+  background: var(--container-bg);
+  border: 2px solid var(--border-neon);
+  box-shadow: 0 0 15px var(--neon-glow);
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  color: var(--text-main);
+}
+
+.modal-botones { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+
+#mensaje { margin-top: 15px; font-weight: bold; min-height: 24px; }
+.exito { color: var(--success); text-shadow: 0 0 8px var(--success); }
+.error { color: var(--error); text-shadow: 0 0 8px var(--error); }
+footer { margin-top: 20px; font-size: 0.8rem; color: var(--text-sec); opacity: 0.8; }
