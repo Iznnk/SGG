@@ -1,118 +1,73 @@
-<div class="contenedor" id="mainContainer">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGG - Recuperar Contraseña</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
-  <!-- BARRA SUPERIOR DE CONTROLES (FIXED FLEXBOX) -->
-  <div class="controles-superiores">
-    <button id="temaBtn" class="tema-btn">🌙</button>
-    <select id="idioma">
-      <option value="es">🇦🇷 Español</option>
-      <option value="en">🇺🇸 English</option>
-      <option value="pt">🇧🇷 Português</option>
-      <option value="fr">🇫🇷 Français</option>
-      <option value="it">🇮🇹 Italiano</option>
-      <option value="de">🇩🇪 Deutsch</option>
-      <option value="ru">🇷🇺 Русский</option>
-      <option value="zh">🇨🇳 中文</option>
-      <option value="ja">🇯🇵 日本語</option>
-      <option value="ar">🇸🇦 العربية</option>
-    </select>
-  </div>
-
-  <div class="logo">💰</div>
-  <p class="version">v1.0</p>
-  <h1>SGG</h1>
-  <h3 id="subtitulo">Sistema de Gestión de Gastos</h3>
-
-  <!-- =========================================
-       VISTA 1: LOGIN (AUTENTICACIÓN)
-  ========================================= -->
-  <div id="vistaLogin">
-    <form id="loginForm">
-      <input type="text" id="usuario" placeholder="Usuario" required>
-      <input type="password" id="password" placeholder="Contraseña" required>
-
-      <div class="mostrar-pass">
-        <input type="checkbox" id="mostrarPass">
-        <label for="mostrarPass">Mostrar contraseña</label>
+  <main class="contenedor" id="mainContainer">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="logo-icon" aria-hidden="true">💳</span>
+        <span class="version">v2.0</span>
       </div>
+      <div class="controles">
+        <button id="temaBtn" class="tema-btn" aria-label="Cambiar tema día/noche">🌙</button>
+      </div>
+    </header>
 
-      <button type="submit" id="btnLogin">Ingresar</button>
-    </form>
-    <p id="mensaje"></p>
-  </div>
-
-  <!-- =========================================
-       VISTA 2: DASHBOARD Y CRUD
-  ========================================= -->
-  <div id="vistaDashboard" style="display: none;">
-    
-    <div class="header-user">
-      <span>👤 <strong id="userNombre">Usuario</strong></span>
-      <button id="btnCerrarSesion" class="btn-logout">Cerrar Sesión</button>
+    <div class="header-titulos">
+      <h1>SGG</h1>
+      <h2>CAMBIO DE CONTRASEÑA</h2>
     </div>
 
-    <!-- Panel de Resumen (RF-09) -->
-    <div class="card-resumen">
-      <h4 id="lblTotalGastado">Total Gastado</h4>
-      <p id="totalGastado" class="monto-total">$0.00</p>
-    </div>
-
-    <!-- Formulario Carga / Edición (RF-05 / RF-07) -->
-    <form id="formGasto" class="form-dashboard" novalidate>
-      <input type="hidden" id="gastoId">
-
-      <div class="grid-inputs">
-        <input type="number" id="monto" placeholder="Monto ($)" min="0.01" step="0.01" required>
-        <input type="date" id="fecha" required>
-        
-        <select id="categoria" required>
-          <option value="" disabled selected>Seleccionar Categoría</option>
-          <option value="Alimentación">Alimentación</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Servicios">Servicios</option>
-          <option value="Ocio">Ocio</option>
-          <option value="Salud">Salud</option>
-          <option value="Otros">Otros</option>
-        </select>
-
-        <input type="text" id="descripcion" placeholder="Descripción" required>
+    <form id="recuperarForm" novalidate>
+      <div class="input-group">
+        <label for="recEmail">Email Corporativo Registrado</label>
+        <input type="email" id="recEmail" placeholder="usuario@empresa.com" required autocomplete="email">
       </div>
 
-      <div class="form-botones">
-        <button type="submit" id="btnGuardarGasto">Agregar Gasto</button>
-        <button type="button" id="btnCancelarEdicion" class="btn-cancelar" style="display: none;">Cancelar</button>
+      <div class="input-group">
+        <label for="recPassword">Nueva Contraseña</label>
+        <div class="pass-wrapper">
+          <input type="password" id="recPassword" placeholder="Ingrese su nueva contraseña" required autocomplete="new-password">
+          <button type="button" class="btn-toggle-pass" data-target="recPassword" aria-label="Mostrar u ocultar contraseña">👁️</button>
+        </div>
       </div>
+
+      <!-- Feedback UX en Tiempo Real de los 5 Requisitos -->
+      <ul class="feedback-reqs" id="feedbackReqsRec">
+        <li id="reqLenRec" class="invalid">❌ Mínimo 8 caracteres</li>
+        <li id="reqMayusRec" class="invalid">❌ Al menos 1 letra Mayúscula</li>
+        <li id="reqMinusRec" class="invalid">❌ Al menos 1 letra Minúscula</li>
+        <li id="reqNumRec" class="invalid">❌ Al menos 1 número (Dígito)</li>
+        <li id="reqSymbolRec" class="invalid">❌ Al menos 1 carácter especial (!@#$%^&*)</li>
+      </ul>
+
+      <div class="input-group">
+        <label for="recPasswordConfirm">Repetir Nueva Contraseña</label>
+        <div class="pass-wrapper">
+          <input type="password" id="recPasswordConfirm" placeholder="Repita la nueva contraseña" required autocomplete="new-password">
+          <button type="button" class="btn-toggle-pass" data-target="recPasswordConfirm" aria-label="Mostrar u ocultar contraseña">👁️</button>
+        </div>
+      </div>
+
+      <button type="submit" id="btnRecuperar" disabled>Actualizar Contraseña</button>
     </form>
 
-    <!-- Tabla Dinámica (RF-06) -->
-    <div class="tabla-container">
-      <table class="tabla-gastos">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Categoría</th>
-            <th>Descripción</th>
-            <th>Monto</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="tablaGastosBody">
-          <!-- Cargas dinámicas con JS -->
-        </tbody>
-      </table>
-    </div>
-  </div>
+    <p id="mensaje" role="alert" aria-live="polite"></p>
 
-  <footer>SGG © 2026</footer>
-</div>
+    <nav class="links-navegacion" aria-label="Navegación de retorno">
+      <a href="index.html" class="nav-link">← Volver al Inicio de Sesión</a>
+    </nav>
 
-<!-- MODAL BAJA LÓGICA (RF-08) -->
-<div id="modalEliminar" class="modal-overlay">
-  <div class="modal-content">
-    <h3>⚠️ Confirmar Eliminación</h3>
-    <p>¿Está seguro de desactivar este registro?</p>
-    <div class="modal-botones">
-      <button id="btnConfirmarEliminar" class="btn-eliminar">Sí, Eliminar</button>
-      <button id="btnCancelarEliminar" class="btn-cancelar">Cancelar</button>
-    </div>
-  </div>
-</div>
+    <footer>SGG © 2026 - Uso Corporativo</footer>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
