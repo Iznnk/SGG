@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGG - Iniciar Sesión</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <main class="contenedor" id="mainContainer">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="logo-icon" aria-hidden="true">💳</span>
+        <span class="version">v2.0</span>
+      </div>
+      <div class="controles">
+        <select id="langSelect" class="lang-select" aria-label="Seleccionar idioma">
+          <option value="es">🇪🇸 Español</option>
+          <option value="en">🇺🇸 English</option>
+          <option value="pt">🇧🇷 Português</option>
+          <option value="fr">🇫🇷 Français</option>
+          <option value="it">🇮🇹 Italiano</option>
+          <option value="de">🇩🇪 Deutsch</option>
+          <option value="ru">🇷🇺 Русский</option>
+          <option value="zh">🇨🇳 中文</option>
+          <option value="ja">🇯🇵 日本語</option>
+          <option value="ar">🇸🇦 العربية</option>
+        </select>
+        <button id="temaBtn" class="tema-btn" aria-label="Cambiar tema día/noche">🌙</button>
+      </div>
+    </header>
+
+    <div class="header-titulos">
+      <h1>SGG</h1>
+      <h2 id="subtitulo" data-i18n="subtitulo">SISTEMA DE GESTIÓN DE GASTOS</h2>
+    </div>
+
+    <section id="vistaLogin">
+      <form id="loginForm" novalidate>
+        <div class="input-group">
+          <label for="usuario" data-i18n="lblUsuario">Email Corporativo</label>
+          <input type="email" id="usuario" placeholder="usuario@empresa.com" required autocomplete="username">
+        </div>
+        
+        <div class="input-group">
+          <label for="password" data-i18n="lblPassword">Contraseña</label>
+          <div class="pass-wrapper">
+            <input type="password" id="password" placeholder="Ingrese su contraseña" required autocomplete="current-password">
+            <button type="button" class="btn-toggle-pass" data-target="password" aria-label="Mostrar u ocultar contraseña">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" id="btnLogin" data-i18n="btnLogin">Ingresar al Sistema</button>
+      </form>
+
+      <p id="mensaje" role="alert" aria-live="polite"></p>
+
+      <nav class="links-navegacion" aria-label="Navegación de autenticación">
+        <a href="recuperar.html" class="nav-link" data-i18n="linkRecuperar">¿Olvidaste tu contraseña? Recuperala</a>
+        <a href="registro.html" class="nav-link" data-i18n="linkRegistrarse">¿No tienes cuenta? Regístrate</a>
+      </nav>
+    </section>
+
+    <footer data-i18n="usoCorporativo">SGG © 2026 - Uso Corporativo</footer>
+  </main>
+
+  <script src="js/lang/es.js"></script>
+  <script src="js/lang/en.js"></script>
+  <script src="js/lang/pt.js"></script>
+  <script src="js/lang/fr.js"></script>
+  <script src="js/lang/it.js"></script>
+  <script src="js/lang/de.js"></script>
+  <script src="js/lang/ru.js"></script>
+  <script src="js/lang/zh.js"></script>
+  <script src="js/lang/ja.js"></script>
+  <script src="js/lang/ar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
